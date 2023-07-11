@@ -1,0 +1,32 @@
+<form action="submit" method="post">
+    <div class='text-dark bg-white row m-2 p-2'>
+        <div class='col-3'><input type="text" name="search" class="form-control" placeholder="search...."></div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="albums" class="form-check-input ">album</div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="artists" class="form-check-input">artist</div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="playlists" class="form-check-input">playlist</div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="tracks" class="form-check-input">track</div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="shows" class="form-check-input">show</div>
+        <div class='col-1 p-2 ms-1'><input type="checkbox" name="episodes" class="form-check-input">episode</div>
+        <div class='col-1'><input type="submit" value="submit" name='submit' class='btn btn-primary'></div>
+        <div class='col-1'><a href='/my?id' class='btn btn-info'>My</a></div>
+        <div class='col-1 border 50%'><?php echo $name ?></div>
+    </div>
+</form>
+
+<?php
+echo "<h1>Recommendations :-</h1>";
+session_start();
+
+echo "<div class='row'>";
+foreach ($_SESSION['view']['tracks'] as $key => $value) {
+    echo "<div class='card col-3 p-3 border  border-5 border-white bg-dark text-light mb-1'
+       style='width: 18rem;height:330px;border-radius:10px; '>
+<img class='card-img-top' src=' " . $value['album']['images'][0]['url'] . " ' alt='Card image cap' height=180px>
+<div class='card-body'>
+<h6 class='card-title'>" . $value['album']['name'] . "</h6>
+<a href='add?spotifyid=" . $value['album']['id'] . "&type=" . $value['album']['type'] . "' class='btn btn-primary border border-white'>Add Playlist</a>
+</div>
+</div>
+";
+}
+echo "</div>";
